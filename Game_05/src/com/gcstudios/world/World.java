@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import com.gcstudios.entities.Enemy;
 import com.gcstudios.entities.Entity;
 import com.gcstudios.entities.Player;
+import com.gcstudios.entities.Spawner;
 import com.gcstudios.main.Game;
 
 public class World {
@@ -20,6 +21,7 @@ public class World {
 	
 	public World(String path){
 		try {
+			
 			BufferedImage map = ImageIO.read(getClass().getResource(path));
 			int[] pixels = new int[map.getWidth() * map.getHeight()];
 			WIDTH = map.getWidth();
@@ -38,9 +40,17 @@ public class World {
 						
 						tiles[xx + (yy * WIDTH)] = new WallTile(xx*16,yy*16,Tile.TILE_WALL);
 						
-					}else if(pixelAtual == 0xFFffffff) {
+					}
+					else if(pixelAtual == 0xFFffffff) {
 						
 						tiles[xx + (yy * WIDTH)] = new FloorTile(xx*16,yy*16,Tile.TILE_FLOOR);
+					}
+					else if (pixelAtual == 0xFFFF0000) {
+						
+						tiles[xx + (yy * WIDTH)] = new FloorTile(xx * 16, yy * 16, Tile.TILE_FLOOR);
+						Spawner spawner = new Spawner(xx * 16, yy * 16, 16, 16, 0, null);
+						Game.entities.add(spawner);
+						
 					}
 				}
 			}
