@@ -3,6 +3,9 @@ package com.gcstudios.entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import com.gcstudios.main.Game;
+import com.gcstudios.world.AStar;
+import com.gcstudios.world.Vector2i;
 import com.gcstudios.world.World;
 
 public class Enemy extends Entity{
@@ -18,7 +21,15 @@ public class Enemy extends Entity{
 	}
 	
 	public void tick() {
-		x++;
+		
+		path = AStar.findPath(Game.world, new Vector2i(this.getX() / 16, this.getY() / 16), new Vector2i(World.xFinal, World.yFinal));
+		followPath(path);
+		
+		if(x >= Game.WIDTH) {
+			//PErdeu vida
+			Game.entities.remove(this);
+			return;
+		}
 	}
 
 }

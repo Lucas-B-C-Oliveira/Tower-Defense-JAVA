@@ -18,6 +18,12 @@ public class World {
 	public static int WIDTH,HEIGHT;
 	public static final int TILE_SIZE = 16;
 	
+	public static int xFinal = 0;
+	public static int yFinal = 0;
+	
+	public static int xINITIAL = 0;
+	public static int yINITIAL = 0;
+	
 	
 	public World(String path){
 		try {
@@ -50,6 +56,17 @@ public class World {
 						tiles[xx + (yy * WIDTH)] = new FloorTile(xx * 16, yy * 16, Tile.TILE_FLOOR);
 						Spawner spawner = new Spawner(xx * 16, yy * 16, 16, 16, 0, null);
 						Game.entities.add(spawner);
+						
+						this.xINITIAL = xx;
+						this.yINITIAL = yy;
+						
+					}
+					else if( pixelAtual == 0xFF0000FF) {
+						
+						tiles[xx + (yy * WIDTH)] = new TargetTile(xx * 16, yy * 16, Tile.TILE_FLOOR);
+						xFinal = xx;
+						yFinal = yy;
+						
 						
 					}
 				}
