@@ -26,7 +26,7 @@ public class Enemy extends Entity{
 		followPath(path);
 		
 		if(x >= Game.WIDTH) {
-			//PErdeu vida
+			Game.vida -= Entity.rand.nextDouble();
 			Game.entities.remove(this);
 			return;
 		}

@@ -35,6 +35,9 @@ public class Game extends Canvas implements Runnable,KeyListener,MouseListener,M
 	
 	private BufferedImage image;
 	
+	public static double vida = 10;
+	public static int dinheiro = 100;
+	
 
 	public static World world;
 	public static List<Entity> entities;
